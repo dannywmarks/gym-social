@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { isAssetError } from "next/dist/client/route-loader";
 import NavBar from "../components/NavBar";
 import SideBar from "../components/SideBar";
+import { GoogleOAuthProvider} from '@react-oauth/google'
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const [isSSR, setIsSSR] = useState(true);
@@ -15,8 +16,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 
   if (isSSR) return null;
 
+ 
+
   return (
-    <div>
+    <GoogleOAuthProvider clientId={`${process.env.NEXT_PUBLIC_GOOGLE_PUBLIC_API_TOKEN}`}>
       <NavBar />
       <div className="flex gap-6 md:gap-20">
         <div className="h-[92vh] overflow-hidden xl:hover:overflow-auto">
@@ -26,7 +29,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           <Component {...pageProps} />
         </div>
       </div>
-    </div>
+    </GoogleOAuthProvider>
   );
 };
 
