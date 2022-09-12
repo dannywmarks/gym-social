@@ -60,10 +60,10 @@ export const VideoCard: NextPage<IProps> = ({ post }) => {
       </div>
       <div className="lg:ml-20 flex gap-4 relative">
         <div className="rounded-3xl" onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
-          <Link href="/">
-            <video ref={videoRef} className="lg:w[600px] h-[300px] md:h-[400px] lg:h[530px] w-[200px] rounded cursor-pointer bg-gray-100" src="" loop ></video>
+          <Link href={`/detail/${post._id}`}>
+            <video ref={videoRef} className="lg:w-[600px] h-[300px] md:h-[400px] lg:h[530px] w-[200px] rounded cursor-pointer bg-gray-100" src="" loop ></video>
           </Link>
-          {isHover && (<div className="absolute bottom-6 cursor-pointer left-8 md:left-14 lg:left-0 flex gap-10 lg:justify-between w-[100px] md:w-[50px] w-3">
+          {isHover && (<div className="absolute bottom-6 cursor-pointer left-8 md:left-14 lg:left-0 flex gap-10 lg:justify-between w-[100px] md:w-[50px] ">
             {playing ? <button onClick={onVideoPress}>
               <BsFillPauseFill className="text-black text-2xl lg:text-4xl" />
             </button> : <button onClick={onVideoPress}><BsFillPlayFill className="text-black text-2xl lg:text-4xl"/></button>}

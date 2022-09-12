@@ -11,7 +11,7 @@ import { createOrGetUser } from "../utils";
 import useAuthStore from "../store/authStore";
 
 const Navbar = () => {
-  const { userProfile, addUser } = useAuthStore();
+  const { userProfile, addUser, removeUser } = useAuthStore();
 
   console.log("up", userProfile);
 
@@ -26,22 +26,35 @@ const Navbar = () => {
       <div>
         {userProfile ? (
           <div className="flex gap-5 md:gap-10">
-            <Link href="/upload"><button className="text-md font-semibold flex items-center gap-2 border-2 px-2 md:px-4">
-            <IoMdAdd className="text-xl" /> {' '}
-            <span className="md:block hidden">Upload</span>
-            </button></Link>
-            {userProfile.image && <Link href="/">
-              <>
-                <Image
-                  className="rounded-full cursor-pointer"
-                  src={userProfile.image}
-                  alt=""
-                  width={40}
-                  height={40}
-        
-                />
-              </>
-            </Link> }
+            <Link href="/upload">
+              <button className="text-md font-semibold flex items-center gap-2 border-2 px-2 md:px-4">
+                <IoMdAdd className="text-xl" />{" "}
+                <span className="md:block hidden">Upload</span>
+              </button>
+            </Link>
+            {userProfile.image && (
+              <Link href="/">
+                <>
+                  <Image
+                    className="rounded-full cursor-pointer"
+                    src={userProfile.image}
+                    alt="profile photo"
+                    width={40}
+                    height={40}
+                  />
+                </>
+              </Link>
+            )}
+            <button
+              type="button"
+              className=" border-2 p-2 rounded-full cursor-pointer outline-none shadow-md"
+              onClick={() => {
+                googleLogout()
+                removeUser()
+              }}
+            >
+              <AiOutlineLogout color="red" fontSize={21} />
+            </button>
           </div>
         ) : (
           <GoogleLogin
